@@ -3,15 +3,19 @@
  boolean dIsPressed = false;
  boolean wIsPressed = false;
  boolean rIsPressed = false;
- 
+ ArrayList <Asteroid> manyAsteroids;
 Star[] manyStars = new Star[350];
 Spaceship ship;
 public void setup() 
 {
   size(500,500); 
   ship = new Spaceship();
+  manyAsteroids = new ArrayList <Asteroid>();
   for(int i = 0 ; i < manyStars.length; i++){
     manyStars[i] = new Star();
+  }
+  for(int i = 0; i < 20; i++){
+   manyAsteroids.add(new Asteroid()); 
     
   }
 }
@@ -31,8 +35,17 @@ public void draw()
   for(int i = 0 ; i < manyStars.length; i++){
     manyStars[i].show();
   }
+  for(int i = 0; i < manyAsteroids.size(); i++){
+    manyAsteroids.get(i).move();
+    manyAsteroids.get(i).show();
+    float t = dist((float)ship.getX(), (float)ship.getY(),(float)manyAsteroids.get(i).getX(), (float)manyAsteroids.get(i).getY());
+    if(t < 20){
+     manyAsteroids.remove(i); 
+    }
+  }
  
   ship.move();
+  
 }
 public void keyPressed(){
  //movement
