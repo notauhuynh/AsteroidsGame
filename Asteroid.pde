@@ -1,56 +1,82 @@
-
-class Asteroid extends Floater{
-  double myRotationSpeed;
-  public Asteroid() {
-    myRotationSpeed = Math.random()* 2 - 1;
-    corners = 6;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    xCorners[0] = -11;    
-    yCorners[0] = -8;    
-    xCorners[1] = 7;    
-    yCorners[1] = -8;    
-    xCorners[2] = 13;    
-    yCorners[2] = 0;
-    xCorners[3] = 6;
-    yCorners[3] = 10;
-    xCorners[4] =-11;
-    yCorners[4] = 8;
-    xCorners[5] = -13; 
-    yCorners[5] = 0;
-
-    myCenterX = Math.random()* 500;
-    myCenterY = Math.random()* 500;
-
-    myXspeed = Math.random()* 1.5 - 1;
-    myYspeed = Math.random()* 1.5 - 1;
-
-    myPointDirection = 0;
-
-    myColor = 255;
+//OLD PART 2 - REDUNDANT, CHECK DOCUMENTS
+//your variable declarations here
+ boolean aIsPressed = false;
+ boolean dIsPressed = false;
+ boolean wIsPressed = false;
+ boolean rIsPressed = false;
+ ArrayList <Asteroid> manyAsteroids;
+Star[] manyStars = new Star[350];
+Spaceship ship;
+public void setup() 
+{
+  size(500,500); 
+  ship = new Spaceship();
+  manyAsteroids = new ArrayList <Asteroid>();
+  for(int i = 0 ; i < manyStars.length; i++){
+    manyStars[i] = new Star();
   }
-  public void setXCenter(double x){
-    myCenterX = x;
-  }
-  public void setYCenter(double y){
-    myCenterY = y;
-  }
-  public double getX(){
-   return myCenterX; 
-  }
-  public double getY(){
-   return myCenterY; 
-  }
-
+  for(int i = 0; i < 20; i++){
+   manyAsteroids.add(new Asteroid()); 
     
+  }
+}
+public void draw() 
+{
+  background(0);
+  ship.show();
+    if(aIsPressed == true){
+   ship.turn(-10); 
+  } 
+  if(dIsPressed == true){
+   ship.turn(10); 
+  } 
+  if(wIsPressed == true){
+   ship.accelerate(.08); 
+  }
+  for(int i = 0 ; i < manyStars.length; i++){
+    manyStars[i].show();
+  }
+  for(int i = 0; i < manyAsteroids.size(); i++){
+    manyAsteroids.get(i).move();
+    manyAsteroids.get(i).show();
+    float t = dist((float)ship.getX(), (float)ship.getY(),(float)manyAsteroids.get(i).getX(), (float)manyAsteroids.get(i).getY());
+    if(t < 10){
+     manyAsteroids.remove(i); 
+    }
+  }
+ 
+  ship.move();
   
-  public void move(){
-    turn(myRotationSpeed * 5);
-    super.move();
+}
+public void keyPressed(){
+ //movement
+  if(key == 'a'){
+    aIsPressed = true;
+  } 
+  if(key == 'd'){
+   dIsPressed = true;
+  }
+  if(key == 'w'){
+   wIsPressed = true; 
+  }
+    if(key == 'r'){
+    ship.Hyperspace(true);
   }
 
   
-  
-  
+}
+public void keyReleased(){
+ if(key=='a'){
+   aIsPressed = false;
+ } 
+ if (key=='d'){
+  dIsPressed = false; 
+ } 
+ if(key == 'w'){
+   wIsPressed = false; 
+  }
+  if(key == 'r'){
+   rIsPressed = false; 
+  }
   
 }
