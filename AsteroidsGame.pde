@@ -1,3 +1,4 @@
+//OLD PART 2 - REDUNDANT, CHECK DOCUMENTS
 //your variable declarations here
  boolean aIsPressed = false;
  boolean dIsPressed = false;
@@ -39,7 +40,7 @@ public void draw()
     manyAsteroids.get(i).move();
     manyAsteroids.get(i).show();
     float t = dist((float)ship.getX(), (float)ship.getY(),(float)manyAsteroids.get(i).getX(), (float)manyAsteroids.get(i).getY());
-    if(t < 20){
+    if(t < 10){
      manyAsteroids.remove(i); 
     }
   }
