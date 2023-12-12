@@ -1,12 +1,11 @@
 //OLD PART 2 - REDUNDANT, CHECK DOCUMENTS
 //your variable declarations here
- boolean aIsPressed = false;
- boolean dIsPressed = false;
- boolean wIsPressed = false;
- boolean rIsPressed = false;
- ArrayList <Asteroid> manyAsteroids;
-Star[] manyStars = new Star[350];
-Spaceship ship;
+private boolean aIsPressed = false;
+private boolean dIsPressed = false;
+private boolean wIsPressed = false;
+public ArrayList <Asteroid> manyAsteroids;
+public Star[] manyStars = new Star[350];
+public Spaceship ship;
 public void setup() 
 {
   size(500,500); 
@@ -40,7 +39,7 @@ public void draw()
     manyAsteroids.get(i).move();
     manyAsteroids.get(i).show();
     float t = dist((float)ship.getX(), (float)ship.getY(),(float)manyAsteroids.get(i).getX(), (float)manyAsteroids.get(i).getY());
-    if(t < 10){
+    if(t < 20){
      manyAsteroids.remove(i); 
     }
   }
@@ -74,9 +73,5 @@ public void keyReleased(){
  } 
  if(key == 'w'){
    wIsPressed = false; 
-  }
-  if(key == 'r'){
-   rIsPressed = false; 
-  }
-  
+  }  
 }
